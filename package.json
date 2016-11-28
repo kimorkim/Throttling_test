@@ -1,0 +1,23 @@
+{
+  "name": "throttling_test",
+  "version": "1.0.0",
+  "description": "electron web preferences throttling test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kimorkim@github.com/kimorkim/Throttling_test.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kimorkim/Throttling_test/issues"
+  },
+  "homepage": "https://github.com/kimorkim/Throttling_test#readme"
+}

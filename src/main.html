@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="workspace">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <button id="reload">reload</button>
+        <button id="child1">child1</button>
+        <button id="child2">child2</button>
+        <div id="countView1"></div>
+        <div id="countView2"></div>
+        <script>
+            const electron = require('electron');
+            const ipcRenderer = electron.ipcRenderer;
+            const countView = {
+                child1: document.querySelector('#countView1'),
+                child2: document.querySelector('#countView2'),
+            }
+            document.addEventListener('click', function (e) {
+                var target = e.target;
+                if(target.nodeName === 'BUTTON') {
+                    ipcRenderer.send('command', target.id);
+                }
+            });
+
+            ipcRenderer.on('message', function (e, args) {
+                countView[args.id].innerText = args.msg;
+            });            
+        </script>
+    </body>
+</html>

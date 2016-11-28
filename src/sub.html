@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="workspace">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <button id="reload">reload</button>
+        <button id="start">start</button>
+        <button id="stop">stop</button>
+        <div id="countView"></div>
+        <script>
+            var count = 0;
+            const electron = require('electron');
+            const ipcRenderer = electron.ipcRenderer;
+            const countView = document.querySelector('#countView');
+            var interval;
+            document.addEventListener('click', function (e) {
+                var target = e.target;
+                if(target.nodeName === 'BUTTON') {
+                    switch(target.id) {
+                        case 'reload':
+                            ipcRenderer.send('command', 'reload');
+                            break;
+                        case 'start':
+                            if(interval) {
+                                clearInterval(interval);
+                            }
+                            interval = setInterval(function () {
+                                count++;
+                                countView.innerText = count;
+                                ipcRenderer.send('message', count);
+                            }, 100);
+                            break;
+                        case 'stop':
+                            count = 0;
+                            clearInterval(interval);
+                            break;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
