@@ -47,6 +47,10 @@ ipcMain.on('command', function (e, arg) {
                 }
                 subWindow[arg].focus();
             }
+
+            subWindow[arg].on('close', function () {
+                subWindow[arg] = undefined;
+            })
             break;
     }
 });
